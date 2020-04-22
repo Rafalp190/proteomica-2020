@@ -9,7 +9,6 @@ par.add_argument('--protease','-p',dest='protease',type=str,help=help_text,requi
 args=par.parse_args()
 
 
-records = list(SeqIO.parse(args.fasta, "fasta"))
-
+records = list(SeqIO.parse("./input/"+args.fasta, "fasta"))
 split_array = protease_split(args.protease, str(records[0].seq))
 print(split_array)
