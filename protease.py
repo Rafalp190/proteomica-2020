@@ -37,8 +37,8 @@ def protease_split(protease, sequence):
       "type": "C"
     },
     {
-      "protease": "Proteinasa K",
-      "cutoff": ["K", "R"],
+      "protease": "Proteinasa-K",
+      "cutoff": ["A","E","F","I","L","T","V","W", "Y"],
       "type": "C"
     },
     {
