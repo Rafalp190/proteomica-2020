@@ -1,3 +1,8 @@
+#used to create a csv easier
+import pandas as pd
+import numpy as np
+import csv
+
 # looks for aminoacid, code and weight
 aminoacid = [
 	{
@@ -120,6 +125,7 @@ def aminoacid_weight(letter):
 	
 
 def total_weight(aminoacid_Chain):
+	weight =[]
 	# loops over all molecules
 	for molecule in aminoacid_Chain:
 		
@@ -130,18 +136,16 @@ def total_weight(aminoacid_Chain):
 		for letter in molecule:
 			weight_molecule = weight_molecule + aminoacid_weight(letter)
 
-
-
-
-
 		#total weight of the molecule
-		print(str(weight_molecule))
-	# found = True
-	# for i in aminoacid_Chain:
-	# 	print(i)
+		weight.append(weight_molecule)
 
-	# return (tuples)
+	#merges the two lists using for cycle over the two generated lists
+	tuples = [(aminoacid_Chain[i], weight[i]) for i in range(0, len(aminoacid_Chain))]
+	print(str(tuples))
 
+	with open('tuples.csv','w') as out:
+	    csv_out=csv.writer(out)
+	    csv_out.writerow(["aminoacid","weight"])
+	    for row in tuples:
+    		csv_out.writerow(row)
 
-test = ["ASFG","KVUA","RSTA"]
-total_weight(test)
