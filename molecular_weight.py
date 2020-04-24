@@ -124,7 +124,7 @@ def aminoacid_weight(letter):
 			return i["weight"]
 	
 
-def total_weight(aminoacid_Chain):
+def total_weight(aminoacid_Chain, id_seq, filename,protease):
 	weight =[]
 	# loops over all molecules
 	for molecule in aminoacid_Chain:
@@ -141,9 +141,9 @@ def total_weight(aminoacid_Chain):
 
 	#merges the two lists using for cycle over the two generated lists
 	tuples = [(aminoacid_Chain[i], weight[i]) for i in range(0, len(aminoacid_Chain))]
-	print(str(tuples))
+	#print(str(tuples))
 
-	with open('tuples.csv','w') as out:
+	with open('./output/'+filename+'_'+id_seq+'_digestion_'+protease+'_weight.csv','w') as out:
 	    csv_out=csv.writer(out)
 	    csv_out.writerow(["aminoacid","weight"])
 	    for row in tuples:

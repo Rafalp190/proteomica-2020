@@ -1,6 +1,7 @@
 import argparse
 from Bio import SeqIO
 from protease import protease_split
+from molecular_weight import total_weight
 
 help_text = "Protease used in experiment. Options: Tripsina, Elastasa, Proteinasa-K, ArgC, AspN, Quimiotripsina, GluC, LysC, LysN"
 par=argparse.ArgumentParser(description='This script simulates a protein digestion')
@@ -13,19 +14,20 @@ args=par.parse_args()
 #FUNCTION FOR MULTISEQUENCE FASTA
 if args.m == True:
   records = list(SeqIO.parse("./input/"+args.fasta, "fasta"))
-  for record in records:
-    split_array = protease_split(args.protease, str(record.seq))
-    print(split_array)
+  for i in range(len(records)):
+    split_array = protease_split(args.protease, str(records[i].seq))
+    #print(split_array)
     #TODO JULIO
     #ADD WEIGHT FUNCTION
     #ADD PRINT TO CSV with name =  args.fasta_record.id.csv
     #CSV STRUCTURE: args.fasta,record.id,sequence_chunk,weight
+    total_weight(split_array, "seq_"+str(i), args.fasta, args.protease)
 else:
 #FUNCTION FOR SINGLESEQUENCE FASTA
   records = list(SeqIO.parse("./input/"+args.fasta, "fasta"))
   split_array = protease_split(args.protease, str(records[0].seq))
-  print(split_array)
     #TODO JULIO
     #ADD WEIGHT FUNCTION
     #ADD PRINT TO CSV with name =  args.fasta_record.id.csv
     #CSV STRUCTURE: args.fasta,record[0].id,sequence_chunk,weight
+  total_weight(split_array, "seq_0", args.fasta, args.protease)
