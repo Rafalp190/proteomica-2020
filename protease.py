@@ -13,7 +13,7 @@ def n_terminal_split(cutoff, sequence_array):
   return new_sequence_array
 
 def c_terminal_split(cutoff, sequence_array):
-  #corte antes del aminoacido
+  #corte despues del aminoacido
   new_seq_array = []
   for i in sequence_array:
     new_seq = i.split(cutoff)
