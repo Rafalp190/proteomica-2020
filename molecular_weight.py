@@ -2,6 +2,8 @@
 import pandas as pd
 import numpy as np
 import csv
+from Bio.SeqUtils.ProtParam import ProteinAnalysis
+from Bio import SeqIO
 
 # looks for aminoacid, code and weight
 aminoacid = [
@@ -149,3 +151,9 @@ def total_weight(aminoacid_Chain, id_seq, filename,protease):
 	    for row in tuples:
     		csv_out.writerow(row)
 
+def molecular_weight(fasta):
+	records = list(SeqIO.parse(fasta,"fasta"))
+	records_mw = []
+	for record in records:
+		records_mw.append(ProteinAnalysis(str(record.seq)).molecular_weight())
+	return records_mw
