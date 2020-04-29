@@ -1,31 +1,5 @@
 flatten = lambda l: [item for sublist in l for item in sublist]
-
-def n_terminal_split(cutoff, sequence_array):
-  #corte antes del aminoacido
-  new_seq_array = []
-  for i in sequence_array:
-    new_seq = i.split(cutoff)
-    #print(new_seq)
-    for k in range(1, len(new_seq)):
-      new_seq[k] = cutoff  + new_seq[k]
-    new_seq_array.append(new_seq)
-  new_sequence_array = flatten(new_seq_array)
-  return new_sequence_array
-
-def c_terminal_split(cutoff, sequence_array):
-  #corte despues del aminoacido
-  new_seq_array = []
-  for i in sequence_array:
-    new_seq = i.split(cutoff)
-    #print(new_seq)
-    for k in range(0, len(new_seq)-1):
-      new_seq[k] = new_seq[k] + cutoff
-    new_seq_array.append(new_seq)
-  new_sequence_array = flatten(new_seq_array)
-  return new_sequence_array
-
-def protease_split(protease, sequence):
-  protease_dict = [
+protease_dict = [
     {
       "protease": "Tripsina",
       "cutoff": ["K", "R"],
@@ -72,6 +46,32 @@ def protease_split(protease, sequence):
       "type": "N"
     },
   ]
+
+def n_terminal_split(cutoff, sequence_array):
+  #corte antes del aminoacido
+  new_seq_array = []
+  for i in sequence_array:
+    new_seq = i.split(cutoff)
+    #print(new_seq)
+    for k in range(1, len(new_seq)):
+      new_seq[k] = cutoff  + new_seq[k]
+    new_seq_array.append(new_seq)
+  new_sequence_array = flatten(new_seq_array)
+  return new_sequence_array
+
+def c_terminal_split(cutoff, sequence_array):
+  #corte despues del aminoacido
+  new_seq_array = []
+  for i in sequence_array:
+    new_seq = i.split(cutoff)
+    #print(new_seq)
+    for k in range(0, len(new_seq)-1):
+      new_seq[k] = new_seq[k] + cutoff
+    new_seq_array.append(new_seq)
+  new_sequence_array = flatten(new_seq_array)
+  return new_sequence_array
+
+def protease_split(protease, sequence):
   prot_type = False
   prot_cutoff = False
   for i in protease_dict:
