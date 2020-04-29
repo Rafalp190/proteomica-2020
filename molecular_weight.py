@@ -146,7 +146,7 @@ def total_weight(aminoacid_Chain, id_seq, filename,protease, output=""):
 	#print(str(tuples))
 	if len(output)==0:
 		output=filename+'_'+id_seq+'_digestion_'+protease+'_weight'
-	with open('./output/digestion/'+output+'.csv','w') as out:
+	with open('./output/digestion/'+output+'.csv','w', newline='') as out:
 	    csv_out=csv.writer(out)
 	    csv_out.writerow(["aminoacid","weight"])
 	    for row in tuples:
